@@ -1,0 +1,118 @@
+/* === mixin === */
+//clear float
+@mixin clearfloat{
+    content:'\0020';
+    clear:both;
+    display: table;
+   
+} 
+
+@mixin clearFn($selector) {
+    #{$selector}:after,#{$selector}:before{
+        content:'\0020';
+        clear:both;
+        display: table;
+    }
+}
+@include clearFn('.test');
+
+
+
+//popLayout
+.popLayout{
+    padding:px2rem(20);
+    background:#fff;
+    border-radius:px2rem(10);
+    & .papLayout_con{
+        margin-bottom:px2rem(30);
+        padding-bottom:px2rem(50);
+        padding-top:px2rem(50);
+        text-align: center;
+        font-size:px2rem(40)
+    }
+}
+
+
+//center
+@mixin elePosition{
+    position: absolute;
+    left:50%;
+    top:50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    display: block;
+}
+@mixin elePosition2{
+    position: absolute;
+    left:50%;
+    top:43%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    display: block;
+}
+
+
+//yd-cell-item
+.yd-cell-item{
+    padding-left:px2rem(20) !important;
+    padding-right:px2rem(20) !important;
+    & .yd-cell-icon{
+        display:none
+    }
+}
+.yd-cell-item:not(:last-child):after {
+    margin-left:0 !important;
+}
+
+
+//prevent scroll
+.preventOverflowX{
+    overflow-x:hidden
+}
+.preventOverflowXY{
+    overflow-x:hidden;
+    overflow-Y:hidden
+}
+
+
+//position bottom
+.posBottom-wrap{
+    position: fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    width:100%;
+    background:#fff;
+    height: px2rem(100);
+    border-top:1px solid #ccc;
+    padding:px2rem(10);
+    @extend %flexRowCenter;
+    & .averageSub-box{
+        margin-right:px2rem(20);
+        @extend %flexRowChild
+    }
+    & .averageSub-box:last-child{
+        margin-right:0;
+    }
+    
+}
+
+
+
+
+//all buttons
+.btn-default,.btn-cancel{
+    background: $blue;
+    color:#fff;
+    font-size:px2rem(30);
+    border-radius:px2rem(5);
+    @extend %flexRowChild;
+    & i{
+        margin-right:px2rem(10)
+    }
+}
+.btn-cancel{
+    background:$gray;
+}

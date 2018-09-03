@@ -1,0 +1,116 @@
+
+
+.top-box{
+   box-shadow: px2rem(1) px2rem(1) px2rem(5) px2rem(5) rgba(148, 148, 148, 0.2);
+}
+.top-box-line-red{
+   border:2px solid #ff6600;
+}
+.top-box-line-blue{
+    border:2px solid #230a92;
+ }
+
+.bank-wrap{
+    & label{
+        font-weight: bold !important
+    }
+    & .bank-num{
+        font-size:px2rem(30);
+    }
+}
+
+
+.bank-table-box-t{
+    margin-bottom:0 !important;
+    border:1px solid #ccc;
+    border-bottom:0;
+    & .yd-cell:after{
+        border:2px solid rgb(9, 118, 243) !important
+    }
+    & .yd-cell{
+        background: #d9f7ff !important;
+    }
+}
+
+.bank-table-box-main{
+    background:#fff;
+    border:1px solid #ccc;
+    border-top:0;
+    & .yd-flexbox-horizontal{
+        border-bottom:1px solid #ccc;
+        padding:px2rem(15) 0;
+        text-align: center
+    }
+    & .yd-flexbox-horizontal:nth-last-of-type(1){
+       border-bottom:0
+    }
+
+    & .table-t{
+        font-size: px2rem(24) !important;
+    }
+}
+
+
+.input_box{
+    font-size: px2rem(26) !important;
+    width:100% !important;
+    background: transparent !important
+}
+
+
+.addNewCharge-wrap{
+   // background:red;
+    height:100%;
+    flex: 1;
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    top:px2rem(167);
+    z-index: 1;
+    
+    & .topToggleMenu{
+        height:px2rem(67); 
+        overflow-y:auto; 
+        position:fixed; 
+        top:px2rem(80);
+        left:0;
+        width:100%;
+        z-index:6;
+        background: red
+    }
+
+}
+
+
+//wrap-out
+.wrap-out{
+    min-height: px2rem(100);
+    display:flex;
+    flex-direction:row;
+    align-items: stretch;
+    & .wrap-description-def{
+        padding:0 px2rem(18);
+        color:$fnColor;
+        display: flex;
+        background: rgb(243, 243, 243);
+        flex:1;
+        display:flex;
+        align-items: center
+    }
+}
+
+
+//description
+.wrap-description{
+    background: #f8e4d7;
+    padding:px2rem(22) px2rem(18);
+    flex: 1;
+    & .description-self{
+        width:100%;
+        padding:px2rem(5);
+        line-height:px2rem(34) !important;
+        min-height:px2rem(50) !important;
+    }
+}
+

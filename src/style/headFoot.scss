@@ -1,0 +1,13 @@
+#app{
+    padding-top:$topMar;
+    background: $bg_default !important;
+}
+
+.navBar{
+    background: #fff !important;
+    height: $topMar !important;
+    & .yd-navbar-center{
+        font-size: px2rem(30)
+    }
+}
+

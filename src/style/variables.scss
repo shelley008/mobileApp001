@@ -1,0 +1,103 @@
+/* === rem === */
+$baseFontSize:75;
+html {
+  font-size: $baseFontSize;
+}
+@function px2rem($px) {
+    @return ($px / $baseFontSize ) * 1rem;
+}
+
+/* === top height === */
+$topMar:px2rem(80);
+
+
+/* === default color === */
+$bg_default:#f7f7f7;
+$green:rgb(0, 153, 0);
+$red:#ff6600;
+$blue:#4196ff;
+$gray:#bababa;
+
+$fnColor:#919191;
+
+.red{
+  color:$red !important
+}
+.green{
+  color:$green !important
+}
+
+
+/* === all margin === */
+.mar{
+  padding:px2rem(20)
+}
+
+
+/* === mixin === */
+.select-bar{
+  color:#000 !important;
+  padding:0 px2rem(10)
+}
+
+.r_box{
+  width:98%;
+  margin-left:px2rem(10)
+}
+
+.input_sr{
+  border:none;
+  border-bottom:1px solid #000;
+  height: px2rem(40);
+  width:100%;
+  padding:0 px2rem(10);
+  overflow: hidden;
+  background: #fff;
+}
+
+
+
+/* === 禁止长按拷贝 === */
+*{   
+  -webkit-touch-callout:none;  /*系统默认菜单被禁用*/   
+  -webkit-user-select:none; /*webkit浏览器*/   
+  -khtml-user-select:none; /*早期浏览器*/   
+  -moz-user-select:none;/*火狐*/   
+  -ms-user-select:none; /*IE10*/   
+  user-select:none;   
+}  
+
+
+
+/* === 以上代码也包括了禁止了input的输入，所以要单加一段代码开放input的权限~ === */
+input,textarea {      
+  -webkit-user-select:auto; /*webkit浏览器*/     
+}  
+
+// 访问控制管理页
+// http://localhost:8000/#/confControl?numericId=15100000010&token=1127890382&showNav=true
+
+
+    // this.$router.push({
+    //     path:'/confControl',
+    //     query: {
+    //       numericId: this.conf.numericId,
+    //       token:localStorage.getItem('token'),
+    //       showNav:true
+    //     }
+    //   })
+
+
+//水平内容居中
+%flexRowCenter{
+  display: flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+}
+%flexRowChild{
+ flex:1;
+ height:100%;
+ @extend %flexRowCenter
+}
+
