@@ -20,6 +20,11 @@ import 'vue-ydui/dist/ydui.rem.css';
 Vue.use(YDUI);
 
 
+//Material
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.css'
+Vue.use(VueMaterial);
+
 
 Vue.config.productionTip = false
 

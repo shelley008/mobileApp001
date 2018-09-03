@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "dom-to-image": "^2.6.0",
     "node-sass": "^4.9.2",
     "sass-loader": "^7.0.3",
     "sortablejs": "^1.7.0",
@@ -19,7 +20,8 @@
     "vue-router": "^3.0.1",
     "vue-ydui": "^1.2.2",
     "vuedraggable": "^2.16.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vue-material": "^0.7.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
