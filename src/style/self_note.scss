@@ -47,3 +47,104 @@
   width:150px;
   margin:10px
 }
+
+
+
+
+//dynamic input
+.com-input-container {
+  width: 100%;
+  min-height: 48px;
+  margin: 4px 0 24px;
+  padding-top: 16px;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  position: relative;
+  //background: yellow;
+  //-webkit-transition:all 0.2s ease-in;
+  //transition:all 0.4s;
+}
+
+//.com-input-container:hover{
+//  background: #ccc;
+//  width:80%
+//}
+//line
+.com-input-container:after {
+  height: 1px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.12);
+  -webkit-transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  content: " ";
+}
+
+.com-input-container.com-input-focused:after {
+  height: 2px;
+  background-color: #3f51b5;
+}
+
+//label
+.com-input-container label {
+  position: absolute;
+  top: 23px;
+  left: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -webkit-transition-duration: .3s;
+  transition-duration: .3s;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.com-input-container.com-input-focused label {
+  color: #3f51b5;
+}
+.com-input-container.com-input-focused label, .com-input-container.com-has-value label {
+  pointer-events: auto;
+  top: 0;
+  opacity: 1;
+  font-size: 12px;
+}
+
+//textarea
+.com-input-container.com-input-focused input,
+.com-input-container.com-input-focused textarea,
+.com-input-container.com-has-value input,
+.com-input-container.com-has-value textarea {
+  font-size: 16px;
+}
+
+.com-input-container textarea {
+  min-height: 32px;
+  max-height: 230px;
+  padding: 5px 0;
+  resize: none;
+  line-height: 1.3em;
+}
+
+.com-input-container input, .com-input-container textarea {
+  width: 100%;
+  height: 32px;
+  padding: 0;
+  display: block;
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+  flex: 1;
+  border: none;
+  background: none;
+  -webkit-transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -webkit-transition-property: font-size;
+  transition-property: font-size;
+  color: rgba(0, 0, 0, 0.54);
+  font-family: inherit;
+  font-size: 1px;
+  line-height: 32px;
+}

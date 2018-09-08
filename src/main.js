@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './style/layout.scss'
+import './commonJs/gobal'
 
 
 //axios
