@@ -5,8 +5,10 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './style/layout.scss'
-import './commonJs/gobal'
-
+//缓存方法
+import './commonJs/storageMethods'
+//自定义指令
+import './commonJs/customDirective'
 
 //axios
 import axios from 'axios'
@@ -22,9 +24,9 @@ Vue.use(YDUI);
 
 
 //Material
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.css'
-Vue.use(VueMaterial);
+// import VueMaterial from 'vue-material'
+// import 'vue-material/dist/vue-material.css'
+// Vue.use(VueMaterial);
 
 
 Vue.config.productionTip = false

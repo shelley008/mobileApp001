@@ -7,7 +7,7 @@
          <yd-navbar-back-icon></yd-navbar-back-icon>
         </router-link>
         <div slot="center">{{topTit}}</div>
-        <div slot="right" @click="takePic1" style="margin-right:15px">
+        <div slot="right" @click="takePic4" style="margin-right:15px">
         截图
         </div>
         <div slot="right" @click="deletePic">
@@ -54,7 +54,7 @@
         <!--历史记事本列表-->
          <div class="historyList">
              <ul>
-                 <li v-for="(note,index) in noteDatas">
+                 <li v-for="(note,index) in noteData">
                    <b>{{note.title}}</b>
                    <span @click="deleteNote(index)">删除</span>
                    <span>修改</span>
@@ -62,7 +62,16 @@
              </ul>
          </div>
 
-       <div>{{bt}}</div>
+        <div id="result" name="result"></div>
+
+        <!--导入文件-->
+         <div>
+           <input id="file" type="file" accept=".json"/>
+           <button @click="importJSON">导入json</button>
+           <button @click="readAsDataURL">导入图像</button>
+         </div>
+
+
 
 
       </div>
@@ -72,8 +81,9 @@
 <script>
 //截图工具
 import domtoimage from 'dom-to-image'
-//store
-import {mapState,mapMutations,mapGetters,mapActions} from 'vuex'
+
+import FileSaver from 'file-saver'
+
 
 export default {
     name:'Note',
@@ -92,21 +102,18 @@ export default {
             noteDescription:''
           },
           myTitle:'',
-          noteInfo:""
-
+          // 将导入的json保存在这个对象下
+          ImportJSON: {}
         }
     },
     mounted(){
-
+      //SetUserData.save('aaaaa')
     },
     watch:{
 
     },
     computed:{
-      ...mapState(['bt','noteDatas']),
-      // noteDatas(){
-      //   return this.$store.state.b.noteDatas
-      // },
+
     },
     methods:{
 
@@ -125,16 +132,6 @@ export default {
         data.title = this.newNoteData.title
         data.noteDescription = this.newNoteData.noteDescription
         this.noteData.unshift(data)
-
-        //保存到缓存中
-        this.UserData.save(data)
-        //从缓存中取数据
-        this.noteInfo = this.UserData.get()
-        console.log('*****',this.noteInfo)
-
-        this.UserData.remove()
-        console.log('*****',this.noteInfo)
-
       },
       //清空表单
       clearForm(){
@@ -147,6 +144,51 @@ export default {
         this.noteData.splice(index,1)
       },
 
+      //导出生成json文件
+      downloadJson(data) {
+        var blob = new Blob([JSON.stringify(data)], { type: "" });
+        FileSaver.saveAs(blob, "hello.json");
+      },
+
+      //导出生成文本
+      downloadText(data) {
+        var blob = new Blob([JSON.stringify(data)], { type: "text/plain;charset=utf-8" });
+        FileSaver.saveAs(blob, "hello.txt");
+      },
+
+      //导入json文件
+      importJSON () {
+        const file = document.getElementById('file').files[0]
+        const reader = new FileReader()
+        reader.readAsText(file)
+        const _this = this
+        reader.onload = function () {
+          // this.result为读取到的json字符串，需转成json对象
+          _this.ImportJSON = JSON.parse(this.result)
+          // 检测是否导入成功
+          console.log(_this.ImportJSON)
+        }
+      },
+
+      //导入图片
+      readAsDataURL(){
+        //检验是否为图像文件
+        var file = document.getElementById("file").files[0];
+        if(!/image\/\w+/.test(file.type)){
+          alert("看清楚，这个需要图片！");
+          return false;
+        }
+        var reader = new FileReader();
+        //将文件以Data URL形式读入页面
+        reader.readAsDataURL(file);
+        reader.onload=function(e){
+          var result=document.getElementById("result");
+          console.log('--------re-----')
+          console.log(this.result)
+          //显示文件
+          result.innerHTML='<img src="' + this.result +'" alt="" />';
+        }
+      },
 
       //截图 64位码编码
       takePic1(){
@@ -170,6 +212,40 @@ export default {
             console.error('error------')
           })
       },
+     //截图 PNG图并下载
+      takePic2(){
+        domtoimage.toBlob(document.getElementById('myNode'))
+          .then(function (blob) {
+            FileSaver.saveAs(blob, 'myNode.png');
+          });
+      },
+      //截图 JPEG 并 save
+      takePic3(){
+        domtoimage.toJpeg(document.getElementById('myNode'), { quality: 0.95 })
+          .then(function (dataUrl) {
+            var link = document.createElement('a');
+            link.download = 'my-image-name.jpeg';
+            link.href = dataUrl;
+            link.click();
+          });
+      },
+      //截图 SVG
+      takePic4(){
+        domtoimage.toSvg(document.getElementById('myNode'), {})
+          .then(function (dataUrl) {
+            let img = new Image();
+            img.src = dataUrl;
+            let s = 'height:100px';
+            let c = 'test'
+            img.style = s;
+            img.className = c;
+            document.body.appendChild(img);
+          });
+      },
+
+
+
+
 
       deletePic(){
         let doms = document.querySelectorAll('.test')
