@@ -62,7 +62,6 @@
              </ul>
          </div>
 
-       <div>{{bt}}</div>
 
 
       </div>
@@ -103,12 +102,14 @@ export default {
 
     },
     computed:{
-      ...mapState(['bt','noteDatas']),
-      // noteDatas(){
-      //   return this.$store.state.b.noteDatas
-      // },
+      //...mapState(['bt','noteDatas']),
+      noteDatas(){
+        return this.$store.state.b.noteDatas
+      },
     },
     methods:{
+      //调用store中的方法
+      ...mapMutations(['ADD_NOTES','DELETE_NOTES']),
 
       //给输入框添加样式
       isActiveInput(){
@@ -124,28 +125,28 @@ export default {
         }
         data.title = this.newNoteData.title
         data.noteDescription = this.newNoteData.noteDescription
-        this.noteData.unshift(data)
+        //this.noteData.unshift(data)
+        //调用store,暂存数据
+        this.ADD_NOTES(data)
 
-        //保存到缓存中
-        this.UserData.save(data)
-        //从缓存中取数据
-        this.noteInfo = this.UserData.get()
-        console.log('*****',this.noteInfo)
 
-        this.UserData.remove()
-        console.log('*****',this.noteInfo)
+
 
       },
+      //删除
+      deleteNote(index){
+        console.log('index----',index);
+        //this.noteData.splice(index,1)
+        this.DELETE_NOTES(index)
+      },
+
+
       //清空表单
       clearForm(){
         this.newNoteData.title = ''
         this.newNoteData.noteDescription = ''
       },
-      //删除
-      deleteNote(index){
-        console.log('index----',index);
-        this.noteData.splice(index,1)
-      },
+
 
 
       //截图 64位码编码

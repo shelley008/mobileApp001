@@ -1,16 +1,16 @@
 import Vue from 'vue'
-var SetUserData = {
-  save(obj){
+var UserData = {
+  save(obj,files){
     var storage=window.localStorage;
     //写入a字段
-    storage.a = JSON.stringify(obj);
+    //storage.a = JSON.stringify(obj);
     //写入b字段
-    storage['b'] = JSON.stringify(obj);
+    //storage['b'] = JSON.stringify(obj);
     //写入c字段
-    storage.setItem("noteDatas",JSON.stringify(obj));
+    storage.setItem(files,JSON.stringify(obj));
   },
-  get(){
-     return JSON.parse(localStorage.noteDatas)
+  get(files){
+     return JSON.parse(localStorage.getItem(files))
   },
   clear(){
     localStorage.clear()
@@ -21,10 +21,14 @@ var SetUserData = {
 };
 
 //挂载缓存方法  其他页面引用 this.UserData.save
-Vue.prototype.UserData = SetUserData;
+//Vue.prototype.UserData = UserData;
 
+export default UserData
 
-
+//
+// export function alertfn(){
+//   console.log('-------alert')
+// }
 
 
 
