@@ -4,17 +4,29 @@
   & .historyList{
     margin-top:20px;
     & li{
-       border-bottom:1px solid #ccc;
-       padding:20px 0;
-       height:60px;
+       border-bottom:5px solid #fff;
+       padding:8px 10px;
        position: relative;
-      & b{
-        font-weight: normal;
-        color: #4196ff;
+       background: #1C89EA;
+
+      & dl{
+        margin-bottom:10px;
+        & dt{
+          color:#fff;
+          margin-bottom:10px;
+          font-size: 12px;
+        }
+        & dd{
+          color:#fff;
+          font-size: 14px;
+          background:#0D659B;
+          padding:5px;
+        }
       }
       & span{
         float:right;
         margin-left:10px;
+        font-size:12px;
       }
     }
   }

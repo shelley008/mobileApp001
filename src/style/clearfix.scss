@@ -1,0 +1,10 @@
+@mixin clearFn($selector) {
+  #{$selector}:after,#{$selector}:before{
+    content:'\0020';
+    clear:both;
+    display: table;
+    background: red;
+  }
+}
+
+@include clearFn('.historyList li');

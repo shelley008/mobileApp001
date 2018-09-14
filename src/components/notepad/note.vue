@@ -55,13 +55,28 @@
          <div class="historyList">
              <ul>
                  <li v-for="(note,index) in noteDatas">
-                   <b>{{note.title}}</b>
+                   <dl>
+                     <dt>{{note.title}}</dt>
+                     <dd>{{note.description}}</dd>
+                   </dl>
                    <span @click="deleteNote(index)">删除</span>
                    <span>修改</span>
                  </li>
              </ul>
          </div>
 
+
+        <div>now </div>
+        <hr/>
+        <div style="padding:5px;">
+          <yd-button size="small" type="primary" @click.native="getNowtime()">t1</yd-button>
+          <yd-button size="small" type="primary">t2</yd-button>
+          <yd-button size="small" type="primary">t3</yd-button>
+        </div>
+        <hr/>
+        <div style="padding:20px;">
+
+        </div>
 
 
       </div>
@@ -81,18 +96,13 @@ export default {
           isShowReturn:true,
           pathName:'/',
           topTit:'我的记事本',
-
-          noteData:[
-            {title:'title001我的记事本-1'},
-            {title:'title002我的记事本-2'},
-          ],
           newNoteData:{
             title:'',
             noteDescription:''
           },
           myTitle:'',
-          noteInfo:""
-
+          noteInfo:"",
+          timeFlag:''
         }
     },
     mounted(){
@@ -111,11 +121,26 @@ export default {
       //调用store中的方法
       ...mapMutations(['ADD_NOTES','DELETE_NOTES']),
 
-      //给输入框添加样式
-      isActiveInput(){
-        event.target.parentNode.classList.add('com-input-focused')
-      },
+      //时间处理
+      getNowtime(){
 
+        console.log('************time***********')
+        let d = new Date();
+        console.log('************time***********')
+        console.log(d)
+        console.log(d.getFullYear())           //年份
+        console.log(d.getMonth())              //返回月份 (0 ~ 11)
+        console.log(d.getDate())               //一个月中的某一天 (1 ~ 31)
+        console.log(d.getDay())                //一周中的某一天 (0 ~ 6)
+        console.log(d.getHours())              //小时 (0 ~ 23)
+        console.log(d.getMinutes())            //分钟 (0 ~ 59)
+        console.log(d.getMilliseconds())       //毫秒(0 ~ 999)
+        console.log(d.getSeconds())            //秒数 (0 ~ 59)
+        console.log(d.getTime())               //返回 1970 年 1 月 1 日至今的毫秒数
+        console.log(Date.parse(new Date()))    //返回 1970 年 1 月 1 日午夜到指定日期（字符串）的毫秒数。
+
+        console.log('************time***********')
+      },
 
       //添加新记事到列表中
       saveNewNote(){
@@ -124,14 +149,10 @@ export default {
           return
         }
         data.title = this.newNoteData.title
-        data.noteDescription = this.newNoteData.noteDescription
+        data.description = this.newNoteData.noteDescription
         //this.noteData.unshift(data)
         //调用store,暂存数据
         this.ADD_NOTES(data)
-
-
-
-
       },
       //删除
       deleteNote(index){
