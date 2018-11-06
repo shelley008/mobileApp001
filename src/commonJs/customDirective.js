@@ -4,12 +4,12 @@ Vue.directive('inputActive',{
   inserted:function(el){
     //当鼠标按下时 触发
     el.onmousedown = function(e){
-      console.log('--------1 mousedown')
+     // console.log('--------1 mousedown')
     }
     //当获取焦点时 触发
     el.onfocus = function(e){
-      console.log('--------2 focus')
-      console.log(e)
+      //console.log('--------2 focus')
+     // console.log(e)
       if(e.target.value === '' || e.target.value){
         e.target.parentNode.classList.add('com-input-focused')
       }
@@ -17,11 +17,11 @@ Vue.directive('inputActive',{
 
     //当鼠标单击时 触发
     el.onclick = function(e){
-      console.log('--------4 click')
+     // console.log('--------4 click')
     }
     //当值发生改变时 触发
     el.oninput = function(e){
-      console.log('--------5 input')
+     // console.log('--------5 input')
       if(e.target.value !== ''){
         e.target.parentNode.classList.add('com-has-value')
       }else{
@@ -30,12 +30,12 @@ Vue.directive('inputActive',{
     }
     //当失去焦点时 && 值改变时 触发
     el.onchange = function(e){
-      console.log('--------6 change')
+      //console.log('--------6 change')
 
     }
     //当失去焦点时 触发
     el.onblur = function(e){
-      console.log('--------7 blur')
+      //console.log('--------7 blur')
       if(e.target.value == '' || e.target.value){
         e.target.parentNode.classList.remove('com-input-focused')
       }

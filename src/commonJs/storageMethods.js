@@ -1,22 +1,22 @@
 import Vue from 'vue'
 var UserData = {
-  save(obj,field){
+  save(obj,keyName){
     var storage=window.localStorage;
     //写入a字段
     //storage.a = JSON.stringify(obj);
     //写入b字段
     //storage['b'] = JSON.stringify(obj);
     //写入c字段
-    storage.setItem(field,JSON.stringify(obj));
+    storage.setItem(keyName,JSON.stringify(obj));
   },
-  get(field){
-     return JSON.parse(localStorage.getItem(field))
+  get(keyName){
+     return JSON.parse(window.localStorage.getItem(keyName))
   },
   clear(){
     localStorage.clear()
   },
-  remove(field){
-    localStorage.removeItem(field)
+  remove(keyName){
+    localStorage.removeItem(keyName)
   }
 };
 

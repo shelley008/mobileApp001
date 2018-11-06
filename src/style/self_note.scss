@@ -5,9 +5,10 @@
     margin-top:20px;
     & li{
        border-bottom:5px solid #fff;
-       padding:8px 10px;
+       padding:8px 15px;
        position: relative;
-       background: #1C89EA;
+       background:#0D659B;
+       border-radius:5px;
 
       & dl{
         margin-bottom:10px;
@@ -19,7 +20,7 @@
         & dd{
           color:#fff;
           font-size: 14px;
-          background:#0D659B;
+          background:#000;
           padding:5px;
         }
       }

@@ -1,0 +1,81 @@
+/* === small === */
+.z-btn {
+  height: .6rem;
+  font-size: .26rem;
+  display: inline-block;
+  padding: 0 .2rem;
+  border-radius:3px;
+}
+
+/* === big === */
+.z-btn-block{
+  width:100%;
+  display:block;
+  text-align: center;
+  position: relative;
+  border: none;
+  pointer-events: auto;
+  border-radius: 3px;
+
+  font-size: .36rem;
+  height: 1rem;
+}
+
+
+
+/* === default === */
+button{
+  vertical-align: baseline;
+  background-color: transparent;
+  border: none;
+}
+
+
+a, button, input, label, select {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+
+/* === color === */
+.z-btn-primary {
+  background-color: #ccc;
+  color: #fff;
+}
+
+.z-btn-danger {
+  background-color: #ccc;
+  color: #fff;
+}
+
+.z-btn-warning {
+  background-color: #ffb400;
+  color: #fff;
+}
+
+.z-btn-hollow {
+  background-color: #fff;
+  color: #454545;
+  border: 1px solid #eaeaea;
+}
+
+.z-btn-disabled {
+  background-color: #ccc;
+  color: #f0f0f0;
+  pointer-events: none;
+}
+
+
+/* === button inline === */
+.btn-group-inline{
+  display:flex;
+  flex-direction:row;
+  margin-bottom:10px;
+  justify-content:space-between;
+  align-items:center;
+  & > button{
+    &:not(:nth-last-of-type(1)){
+      margin-right:10px;
+    }
+  }
+}
