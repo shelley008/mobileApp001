@@ -5,6 +5,7 @@ import Word from '@/components/word'
 import Bank from '@/components/account/myBank'
 import addNewCharge from '@/components/account/addNewCharge'
 import Note from '@/components/notepad/note'
+import EnglishBook from '@/components/english/englishScreen'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path:'/Note',
       name:'Note',
       component:Note
+    },
+    {
+      path:'/EnglishBook',
+      name:'EnglishBook',
+      component:EnglishBook
     }
   ]
 })

@@ -1,10 +1,10 @@
 <template>
     <div class="menu_wrapper">
         <div class="menu_box">
-             <a @click="openPopMsg()">英语学习</a>
+             <a @click="openPopMsg()">something</a>
              <router-link to="/Bank">我的银行</router-link>
              <router-link to="/Note">记事本</router-link>
-             <router-link to="/word">4</router-link>
+             <router-link to="/EnglishBook">生词本</router-link>
              <router-link to="/word">5</router-link>
              <router-link to="/word">6</router-link>
         </div>

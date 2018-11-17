@@ -23,18 +23,24 @@
         <!--新建历史列表-->
         <div class="addNewNoteWrap">
           <form>
-            <div class="com-input-container">
+            <div class="com-input-container" :class="[isHasTitVal?'com-has-value':'']">
               <label>标题:</label>
-              <textarea v-inputActive
+              <textarea v-inputActive="{color: 'white', text: 'hello!'}"
                         :maxlength="newNoteData.noteTitLen"
                         class="md-input"
                         v-model="newNoteData.title"
-                        @input="getTitLength()"
+
+                        @input="inputFn($event)"
+                        @focus="focusFn('获取焦点')"
+                        @change="changeFn($event)"
+                        @blur="blurFn('失去焦点')"
+                        @click="clickFn('单击时')"
+
                         ></textarea>
               <span>{{newNoteData.noteTitLenTxtVal}}</span>
             </div>
 
-            <div class="com-input-container">
+            <div class="com-input-container" :class="[isHasDiscript?'com-has-value':'']">
               <label>描述:</label>
               <textarea v-inputActive
                         class="md-input"
@@ -55,11 +61,11 @@
              <ul>
                  <li v-for="(note,index) in noteDatas">
                    <dl>
-                     <dt>{{note.title}}</dt>
+                     <dt>{{note.title}}<span>{{note.timeId | dateFormat}}</span></dt>
                      <dd>{{note.description}}</dd>
                    </dl>
                    <span @click="deleteNote(index)">删除</span>
-                   <span>修改</span>
+                   <span @click="editNotes(index)">修改</span>
                  </li>
              </ul>
          </div>
@@ -72,10 +78,6 @@
           <!--<yd-button size="small" type="primary">t2</yd-button>-->
           <!--<yd-button size="small" type="primary">t3</yd-button>-->
         <!--</div>-->
-
-        <div class="btn-group-inline">
-             <z-button size="large" v-on:click.native="testJs">test</z-button>
-        </div>
 
 
 
@@ -104,8 +106,8 @@ export default {
           newNoteData:{
             title:'',
             noteDescription:'',
-            noteTitLen:10,
-            noteTitLenTxtVal:10
+            noteTitLen:30,
+            timeId:''
           },
           myTitle:'',
           noteInfo:"",
@@ -121,96 +123,78 @@ export default {
 
   //过滤器
   filters:{
-    capitalize:function(value){
-      return value+'001'
+    dateFormat(val){
+      let d = new Date(val)
+      console.log('date:',d.getFullYear()+'年')
+      let year = d.getFullYear()+'年'
+      let month = Number(d.getMonth())+1+'月'
+      let date = d.getDate()+'日'
+      let h = d.getHours()+'点'
+      let f = d.getMinutes()+'分'
+      let fullTime = year + month + date + h + f
+      return fullTime
     }
   },
 
-    mounted(){
-      console.log('------localStorage----start-')
-      console.log(this.msgSt)
-      console.log('------localStorage----end-')
-    },
-    created(){
-
-    },
-
-    watch:{
-
-    },
+    mounted(){},
+    created(){},
+    watch:{},
     computed:{
       ...mapGetters(['GET_NOTES']),
       noteDatas(){
         return this.GET_NOTES
       },
 
-      //剩余字数长度
-      // noteTitLenTxt(){
-      //   let txtlen = this.newNoteData.title.length;
-      //   return this.newNoteData.noteTitLen - txtlen
-      // }
-    },
-    methods:{
-
-      testJs(){
-          let arrs = [
-            { name: "tom", age: 18,sex: "boy",tel:123 },
-            { name: "tom",  age: 19, sex: "boy"},
-            { name: "anchor", age: 20, sex: "boy" },
-            {name: "lucy", age: 18, sex: "girl"},
-            {name: "lily", age: 19, sex: "girl"},
-            {name: "andy",age: 20,sex: "girl"}
-          ];
-          for(let v of arrs){
-            if(v.name == 'lucy') break
-            console.log(v)
-          }
-
+      //输入框样式控制
+      isHasTitVal(){
+        return !!this.newNoteData.title ? true: false
       },
 
+      isHasDiscript(){
+       return !!this.newNoteData.noteDescription ? true: false
+      }
 
 
+    },
+    methods:{
+      //调用store中的方法
+      ...mapMutations(['ADD_NOTES','DELETE_NOTES','EDIT_NOTES']),
 
       //输入框值发生改变时
-      getTitLength(){
+      inputFn(e,val){
+        console.log(val)
+        let reg = /[0-9]/
+        let s = e.target.value
+        this.newNoteData.title = s.replace(reg,'')
        // console.log('oninput',this.newNoteData.title)
         let txtlen = this.newNoteData.title.length;
        // console.log('noteTitLenTxt:',this.noteTitLenTxt)
         this.newNoteData.noteTitLenTxtVal = this.newNoteData.noteTitLen - txtlen
       },
+      //input自动获取焦点
+      focusFn(val){
+       // console.log(val)
+      },
+      //值改变时
+      changeFn(e,val){
 
 
-      //调用store中的方法
-      ...mapMutations(['ADD_NOTES','DELETE_NOTES']),
-
-      //时间处理
-      getNowtime(){
-
-        console.log('************time***********')
-        let d = new Date();
-        // console.log('************time***********')
-        // console.log(d)
-        // console.log(d.getFullYear())           //年份
-        // console.log(d.getMonth())              //返回月份 (0 ~ 11)
-        // console.log(d.getDate())               //一个月中的某一天 (1 ~ 31)
-        // console.log(d.getDay())                //一周中的某一天 (0 ~ 6)
-        // console.log(d.getHours())              //小时 (0 ~ 23)
-        // console.log(d.getMinutes())            //分钟 (0 ~ 59)
-        // console.log(d.getMilliseconds())       //毫秒(0 ~ 999)
-        // console.log(d.getSeconds())            //秒数 (0 ~ 59)
-        // console.log(d.getTime())               //返回 1970 年 1 月 1 日至今的毫秒数
-        // console.log(Date.parse(new Date()))    //返回 1970 年 1 月 1 日午夜到指定日期（字符串）的毫秒数。
-        //
-        // console.log('************time***********')
+      },
+      //当失去焦点时
+      blurFn(val){
+       // console.log(val)
+      },
+      //当单击时
+      clickFn(val){
+       // console.log(val)
       },
 
-      //添加新记事到列表中
-      saveNewNote(){
-        let data = {}
-        // if(!this.newNoteData.title || !this.newNoteData.noteDescription){
-        //   return
-        // }
 
+
+
+      //添加新记事到列表中
+      saveNewNote(t){
+        let data = {}
         if(!this.newNoteData.title){
           alert('标题不能为空')
           return
@@ -220,19 +204,27 @@ export default {
           return
         }
 
-        let reg = /[0-9]+/g;
+        let reg = /\s+/g;
         if(this.newNoteData.title){
-          this.newNoteData.title = this.newNoteData.title.replace(reg,'***')
+        // this.newNoteData.title = this.newNoteData.title.replace(reg,'')
         }
-
-
 
         data.title = this.newNoteData.title
         data.description = this.newNoteData.noteDescription
-        //this.noteData.unshift(data)
-        //调用store,暂存数据
-        this.ADD_NOTES(data)
-        this.clearForm()
+
+        //如果是新记录添加到最新位置，
+        //时间是唯1性
+        if(!this.newNoteData.timeId){
+          let d = new Date()
+          data.timeId = d.getTime()
+          //调用store,暂存数据
+          this.ADD_NOTES(data)
+          this.clearForm()
+        }else{
+          data.timeId = this.newNoteData.timeId
+          this.EDIT_NOTES(data)
+          this.clearForm()
+        }
       },
 
 
@@ -243,11 +235,31 @@ export default {
         this.DELETE_NOTES(index)
       },
 
+      //编辑
+      editNotes(id){
+       // this.EDIT_NOTES(id)
+        if(this.newNoteData.title !== '' || this.newNoteData.noteDescription){
+          alert('要放弃操作么')
+          return
+        }
+        let editObj = []
+        editObj = this.noteDatas.filter((item,index)=>{
+          if(index == id){
+            return item
+          }
+        })
+        this.newNoteData.title = editObj[0].title
+        this.newNoteData.noteDescription = editObj[0].description
+        this.newNoteData.timeId = editObj[0].timeId
+       // console.log('**obj', editObj)
+      },
+
 
       //清空表单
       clearForm(){
         this.newNoteData.title = ''
         this.newNoteData.noteDescription = ''
+        this.newNoteData.timeId = ''
 
         let ele = document.querySelectorAll('.com-input-container')
         console.log(ele)
@@ -263,7 +275,6 @@ export default {
         // ele.setAttribute('class','com-input-container')
         // console.log(ele)
       },
-
 
 
       //截图 64位码编码
