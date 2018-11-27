@@ -2,7 +2,7 @@
  <div>english book
 
    <div>
-      <button @click="foInFn()">调用</button>
+      <button @click="foInFn()">调用1</button>
    </div>
 
  </div>

@@ -183,6 +183,7 @@ Vue.directive('inputActive',{
       }
     }
 
+
     //当鼠标经过时
     el.onmouseover = function(e){
       console.log('--------8 over 当鼠标经过时')
@@ -353,9 +354,6 @@ export default {
           document.body.removeChild(itme)
         })
       }
-
     }
-    
 }
 </script>
-
