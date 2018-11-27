@@ -14,8 +14,6 @@ export default {
         [SET_CHARGE_DATAS](state,datas){
           console.log('data-------')
           console.log('-datas----',datas)
-          console.log('data-------')
-
          
           let i = {id:0}
           let t = Object.assign({},datas,i)
@@ -42,4 +40,3 @@ export default {
 }
 
 
-  
