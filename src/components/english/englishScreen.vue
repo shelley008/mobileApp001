@@ -18,10 +18,26 @@
        }
     },
     mounted(){
-      console.log('test git 111')
+      console.log('this mounted-------start1')
+      this.testJs()
     },
 
     methods:{
+
+      testJs(){
+        let baz;
+        (function(f){
+          let foo = 10;
+          let bar = 2;
+          baz = function(){
+            console.log(foo * bar)
+            return foo * bar;
+          }
+        })();
+        baz()
+      },
+
+
       foInFn(){
         try{
           let n = Number(prompt('please input a right number'))
