@@ -1,3 +1,6 @@
 stash 001
 
 stash 002
+
+
+commit 01
